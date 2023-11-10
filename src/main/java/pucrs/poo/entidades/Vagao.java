@@ -5,7 +5,7 @@ import java.util.StringJoiner;
 /**
  * @author marco.mangan@pucrs.br
  */
-public class Vagao {
+public class Vagao extends Carro{
 
     /**
      * O identificador da próxima instância de vagão.

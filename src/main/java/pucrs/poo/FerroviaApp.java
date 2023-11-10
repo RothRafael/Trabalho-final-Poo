@@ -160,8 +160,8 @@ public class FerroviaApp {
             System.out.println("FALHA: identificador não encontrado!");
         } catch (LocomotivaEmOutraComposicaoException e) {
             System.out.println("FALHA: locomotiva pertence a outra composição!");
-        } catch (LocomotivaAposVagaoException e) {
-            System.out.println("FALHA: locomotiva após vagão!");
+//        } catch (LocomotivaAposVagaoException e) {
+//            System.out.println("FALHA: locomotiva após vagão!");
         }
     }
 

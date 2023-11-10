@@ -48,6 +48,10 @@ public class GaragemVagoes {
     public void preencheGaragem() {
         final int CAPACIDADE_CARGA = 2;
         vagoes.add(new Vagao(CAPACIDADE_CARGA));
+        vagoes.add(new Vagao(CAPACIDADE_CARGA));
+        vagoes.add(new Vagao(CAPACIDADE_CARGA));
+        vagoes.add(new Vagao(CAPACIDADE_CARGA));
+        vagoes.add(new Vagao(CAPACIDADE_CARGA));
     }
 
 }

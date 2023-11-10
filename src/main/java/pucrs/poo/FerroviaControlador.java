@@ -65,7 +65,9 @@ public class FerroviaControlador {
      * @param composicao a composição
      * @param locomotiva a locomotiva a ser engatada
      */
-    public void engataLocomotiva(Composicao composicao, Locomotiva locomotiva) throws LocomotivaEmOutraComposicaoException, LocomotivaAposVagaoException {
+    public void engataLocomotiva(Composicao composicao, Locomotiva locomotiva) throws LocomotivaEmOutraComposicaoException
+            //, LocomotivaAposVagaoException
+    {
         composicao.engataLocomotiva(locomotiva);
     }
 

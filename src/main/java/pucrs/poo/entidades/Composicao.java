@@ -8,7 +8,7 @@ import java.util.StringJoiner;
  *
  * @author marco.mangan@pucrs.br
  */
-public class Composicao {
+public class Composicao{
 
     /**
      * O identificador da próxima instância de composição.
@@ -86,16 +86,17 @@ public class Composicao {
      *
      * @param locomotiva a locomotiva a ser engatada.
      */
-    public void engataLocomotiva(Locomotiva locomotiva) throws LocomotivaAposVagaoException, LocomotivaEmOutraComposicaoException {
+    public void engataLocomotiva(Locomotiva locomotiva) throws //LocomotivaAposVagaoException,
+            LocomotivaEmOutraComposicaoException {
         if (locomotiva == null) {
             throw new IllegalArgumentException();
         }
         if (locomotiva.getComposicao() != null) {
             throw new LocomotivaEmOutraComposicaoException();
         }
-        if (!vagoes.isEmpty()) {
-            throw new LocomotivaAposVagaoException();
-        }
+//        if (!vagoes.isEmpty()) {
+//            throw new LocomotivaAposVagaoException();
+//        }
         locomotivas.add(locomotiva);
     }
 

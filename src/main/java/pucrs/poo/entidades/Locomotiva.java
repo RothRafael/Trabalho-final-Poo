@@ -7,7 +7,7 @@ import java.util.StringJoiner;
  *
  * @author marco.mangan@pucrs.br
  */
-public class Locomotiva {
+public class Locomotiva extends Carro{
 
     /**
      * O identificador da próxima instância de locomotiva.

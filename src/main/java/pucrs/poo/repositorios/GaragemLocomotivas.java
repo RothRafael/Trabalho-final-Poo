@@ -51,6 +51,10 @@ public class GaragemLocomotivas {
         final int PESO_MAXIMO = 300;
         final int QTDADE_MAX_VAGOES = 100;
         locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
+        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
+        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
+        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
+        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
     }
 
 }
