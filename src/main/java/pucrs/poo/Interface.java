@@ -29,7 +29,7 @@ public class Interface {
         subPainel2.setLayout(new GridLayout(0,1));
 
         JButton bt1 = new JButton("Update");
-        JButton bt2 = new JButton("Add");
+        JButton btAdd = new JButton("Add");
         JButton bt3 = new JButton("3");
 
         JTextField txId = new JTextField();
@@ -45,7 +45,7 @@ public class Interface {
         subPainel2.add(txTEMPORARIO);
 
         subPainel2.add(bt1);
-        subPainel2.add(bt2);
+        subPainel2.add(btAdd);
         subPainel2.add(new JLabel("Id:"));
         subPainel2.add(txId);
 
@@ -54,13 +54,13 @@ public class Interface {
 
         bt1.addActionListener(e -> {
             updateLocomotiva(tx, ferroviaControlador);
-            Gatinho();
         });
-        bt2.addActionListener(e -> {
+        btAdd.addActionListener(e -> {
             try {
                 ferroviaControlador.criaComposicao(ferroviaControlador.getLocomotiva(Integer.parseInt(txId.getText())));
+                updateLocomotiva(tx, ferroviaControlador);
             } catch (LocomotivaEmOutraComposicaoException ex) {
-                throw new RuntimeException(ex);
+                Gatinho();
             }
             txTEMPORARIO.setText(ferroviaControlador.listaComposicoes().toString());
         });
