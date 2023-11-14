@@ -95,9 +95,9 @@ public class Locomotiva extends Carro{
     @Override
     public String toString() {
         return new StringJoiner(", ", Locomotiva.class.getSimpleName() + "[", "]")
-                .add("identificador=" + identificador)
-                .add("pesoMaximo=" + pesoMaximo)
-                .add("qtdadeMaxVagoes=" + qtdadeMaxVagoes)
+                .add("Id=" + identificador)
+                .add("KgMax=" + pesoMaximo)
+                .add("QtdV=" + qtdadeMaxVagoes)
                 //.add("composicao=" + composicao)
                 .toString();
     }

@@ -184,9 +184,9 @@ public class Composicao{
     @Override
     public String toString() {
         return new StringJoiner(", ", Composicao.class.getSimpleName() + "[", "]")
-                .add("identificador=" + identificador)
-                .add("vagoes=" + vagoes)
-                .add("locomotivas=" + locomotivas)
+                .add("Id=" + identificador)
+                .add("V=" + vagoes)
+                .add("L=" + locomotivas)
                 .toString();
     }
 }

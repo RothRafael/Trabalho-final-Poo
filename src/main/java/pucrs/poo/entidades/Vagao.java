@@ -75,8 +75,8 @@ public class Vagao extends Carro{
     @Override
     public String toString() {
         return new StringJoiner(", ", Vagao.class.getSimpleName() + "[", "]")
-                .add("identificador=" + identificador)
-                .add("capacidadeCarga=" + capacidadeCarga)
+                .add("Id=" + identificador)
+                .add("Cpc=" + capacidadeCarga)
                 //.add("composicao=" + composicao)
                 .toString();
     }
