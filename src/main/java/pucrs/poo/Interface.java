@@ -19,18 +19,18 @@ import javax.swing.JTextField;
 
 public class Interface extends ControladorUpdatesEjanelas {
 
-    public static FerroviaControlador JanelaEdit(FerroviaControlador ferroviaControlador, int IdComposicao)
+    public static FerroviaControlador JanelaEdit(FerroviaControlador ferroviaControlador, Composicao composicao)
     {
         JFrame frame = new JFrame();
         frame.setLayout(new GridLayout(0,1));
-        frame.setSize(900,250);
+        frame.setSize(900,600);
 
         JPanel panel1 = new JPanel(new GridLayout(1, 2));
 
         //PAINEL ESQUERDA
         JPanel leftPanel1 = new JPanel(new GridLayout(0, 1));
         //LABEL COMPOSICAO
-        JLabel labelComp = new JLabel("Id da composicao atual: " + IdComposicao);
+        JLabel labelComp = new JLabel("Id da composicao atual: " + ferroviaControlador);
         leftPanel1.add(labelComp);
 
         JTextArea txCOMP = new JTextArea(20, 30);
@@ -118,18 +118,16 @@ public class Interface extends ControladorUpdatesEjanelas {
 
         btADD2.addActionListener(e -> {
             try {
-                ferroviaControlador.engataVagao(ferroviaControlador.getComposicao(IdComposicao), ferroviaControlador.getVagao(Integer.parseInt(txIDvagao.getText())));
+                ferroviaControlador.engataVagao(composicao, ferroviaControlador.getVagao(Integer.parseInt(txIDvagao.getText())));
             } catch (PesoMaximoExcedidoException ex) {
                 throw new RuntimeException(ex);
             } catch (MaximoDeVagoesExcedidoException ex) {
                 throw new RuntimeException(ex);
             } catch (VagaoEmOutraComposicaoException ex) {
                 throw new RuntimeException(ex);
-            } catch (IdentificadorNaoEncontradoExceptioin ex) {
-                throw new RuntimeException(ex);
             }
             Updates.updateVagao(txVagoes, ferroviaControlador);
-            Updates.updateComp(txCOMP, ferroviaControlador);
+            Updates.updateCompAtual(txCOMP, ferroviaControlador, composicao);
         });
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -154,19 +152,22 @@ public class Interface extends ControladorUpdatesEjanelas {
         leftPanel3.add(scrollPane3);
 
         //PAINEL DIREITA
-        JPanel rightPanel3 = new JPanel(new GridLayout(0,1));
+        JPanel rightPanel3 = new JPanel(new BorderLayout());
 
-        //BOTAO ADD
+        // BOTAO ADD
         JButton btADD3 = new JButton("ADD");
-        rightPanel3.add(btADD3);
+        rightPanel3.add(btADD3, BorderLayout.WEST);
 
-        //LABEL ID
+        // LABEL ID
         JLabel labelID3 = new JLabel("ID:");
-        rightPanel3.add(labelID3);
+        rightPanel3.add(labelID3, BorderLayout.CENTER);
 
-        //TEXTO ID
+        // TEXTO ID
         JTextField txIDLocomotiva = new JTextField(20);
-        rightPanel3.add(txIDLocomotiva);
+        // You can set the preferred size if needed
+        txIDLocomotiva.setPreferredSize(new Dimension(19, 12));
+        rightPanel3.add(txIDLocomotiva, BorderLayout.EAST);
+
 
 
         panel3.add(leftPanel3);
@@ -178,15 +179,14 @@ public class Interface extends ControladorUpdatesEjanelas {
 
         btADD3.addActionListener(e -> {
             try {
-                ferroviaControlador.engataLocomotiva(ferroviaControlador.getComposicao(IdComposicao), ferroviaControlador.getLocomotiva(Integer.parseInt(txIDLocomotiva.getText())));
+                ferroviaControlador.engataLocomotiva(composicao, ferroviaControlador.getLocomotiva(Integer.parseInt(txIDLocomotiva.getText())));
             } catch (LocomotivaEmOutraComposicaoException ex) {
-                LocomotivaEmOutraComposicao.LocomotivaEmOutraComp();
-            } catch (IdentificadorNaoEncontradoExceptioin ex) {
                 LocomotivaEmOutraComposicao.LocomotivaEmOutraComp();
             }
 
             clearTx(txIDLocomotiva);
             Updates.updateComp(txCOMP, ferroviaControlador);
+            Updates.updateLocomotiva(txLocomotivas, ferroviaControlador);
         });
 
 
@@ -225,6 +225,9 @@ public class Interface extends ControladorUpdatesEjanelas {
         });
         botao1.addActionListener(e -> {
             JanelaCriaComp(ferroviaControlador);
+        });
+        botao3.addActionListener(e -> {
+            listarComposicoes(ferroviaControlador);
         });
     }
 
@@ -266,7 +269,7 @@ public class Interface extends ControladorUpdatesEjanelas {
             try {
                 if (ferroviaControlador.getComposicao(Integer.parseInt(txId.getText()) ) != null)
                 {
-                    JanelaEdit(ferroviaControlador, Integer.parseInt(txId.getText()));
+                    JanelaEdit(ferroviaControlador, ferroviaControlador.getComposicao(Integer.parseInt(txId.getText())));
                 }
             } catch (IdentificadorNaoEncontradoExceptioin ex) {
                 LocomotivaEmOutraComposicao.ComposicaoNãoExisteOULOC();
@@ -314,20 +317,41 @@ public class Interface extends ControladorUpdatesEjanelas {
         btCriarComp.addActionListener(e -> {
             try {
                 ferroviaControlador.criaComposicao(ferroviaControlador.getLocomotiva(Integer.parseInt(txID.getText())));
+                frame.dispose();
+                janelaPreEdit(ferroviaControlador);
+
             } catch (LocomotivaEmOutraComposicaoException ex) {
                 LocomotivaEmOutraComposicao.LocomotivaEmOutraComp();
             }
             Updates.updateLocomotiva(txLocomotivas, ferroviaControlador);
             txLocomotivas.setText(txLocomotivas.getText().replace("],","]\n"));
 
-            JanelaEdit(ferroviaControlador, Integer.parseInt(txID.getText()));
-            frame.dispose();
         });
     }
     private static JButton criarBotao(String texto) {
         JButton botao = new JButton(texto);
         botao.setFont(new Font("Arial", Font.PLAIN, 14));
         return botao;
+    }
+    public static void listarComposicoes(FerroviaControlador ferroviaControlador) {
+        JFrame frame = new JFrame("Lista de composições");
+        frame.setSize(640, 250);
+
+        JPanel panel = new JPanel();
+        JTextArea textComp = new JTextArea(10, 40);
+        textComp.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textComp);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        panel.add(scrollPane);
+        frame.add(panel);
+
+
+        textComp.setText(ferroviaControlador.listaComposicoes().toString().replace("]]], ", "\n"));
+
+
+
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {

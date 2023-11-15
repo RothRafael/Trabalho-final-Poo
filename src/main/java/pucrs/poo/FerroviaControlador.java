@@ -126,6 +126,10 @@ public class FerroviaControlador {
     public Composicao getComposicao(int identificador) throws IdentificadorNaoEncontradoExceptioin {
         return patioComposicoes.getComposicao(identificador);
     }
+    public Composicao getComposicao(Composicao composicao)
+    {
+        return composicao;
+    }
 
     /**
      *
