@@ -98,6 +98,7 @@ public class Composicao{
 //            throw new LocomotivaAposVagaoException();
 //        }
         locomotivas.add(locomotiva);
+        locomotiva.setComposicao(this);
     }
 
     /**
