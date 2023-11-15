@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 public class Interface extends ControladorUpdatesEjanelas {
 
-    public static void JanelaEdit(FerroviaControlador ferroviaControlador, int IdComposicao)
+    public static FerroviaControlador JanelaEdit(FerroviaControlador ferroviaControlador, int IdComposicao)
     {
         JFrame frame = new JFrame();
         frame.setLayout(new GridLayout(0,1));
@@ -30,7 +30,7 @@ public class Interface extends ControladorUpdatesEjanelas {
         //PAINEL ESQUERDA
         JPanel leftPanel1 = new JPanel(new GridLayout(0, 1));
         //LABEL COMPOSICAO
-        JLabel labelComp = new JLabel("Composicao atual: " + ControladorUpdatesEjanelas.getComposicaoAtual());
+        JLabel labelComp = new JLabel("Id da composicao atual: " + IdComposicao);
         leftPanel1.add(labelComp);
 
         JTextArea txCOMP = new JTextArea(20, 30);
@@ -184,13 +184,14 @@ public class Interface extends ControladorUpdatesEjanelas {
             } catch (IdentificadorNaoEncontradoExceptioin ex) {
                 LocomotivaEmOutraComposicao.LocomotivaEmOutraComp();
             }
-            Updates.updateLocomotiva(txLocomotivas,ferroviaControlador);
+
             clearTx(txIDLocomotiva);
             Updates.updateComp(txCOMP, ferroviaControlador);
         });
 
 
         frame.setVisible(true);
+        return ferroviaControlador;
     }
     private static void criarInterface(FerroviaControlador ferroviaControlador) {
         JFrame frame = new JFrame("M.C.T.I.I");
@@ -226,11 +227,8 @@ public class Interface extends ControladorUpdatesEjanelas {
             JanelaCriaComp(ferroviaControlador);
         });
     }
-    private static JButton criarBotao(String texto) {
-        JButton botao = new JButton(texto);
-        botao.setFont(new Font("Arial", Font.PLAIN, 14));
-        return botao;
-    }
+
+
     public static void janelaPreEdit(FerroviaControlador ferroviaControlador)
     {
         JFrame frame = new JFrame("Antes de Editar");
@@ -265,7 +263,15 @@ public class Interface extends ControladorUpdatesEjanelas {
         frame.setVisible(true);
 
         botao1.addActionListener(e -> {
-                JanelaEdit(ferroviaControlador, Integer.parseInt(txId.getText()));
+            try {
+                if (ferroviaControlador.getComposicao(Integer.parseInt(txId.getText()) ) != null)
+                {
+                    JanelaEdit(ferroviaControlador, Integer.parseInt(txId.getText()));
+                }
+            } catch (IdentificadorNaoEncontradoExceptioin ex) {
+                LocomotivaEmOutraComposicao.ComposicaoNãoExisteOULOC();
+                frame.dispose();
+            }
         });
     }
     public static void JanelaCriaComp(FerroviaControlador ferroviaControlador)
@@ -304,6 +310,7 @@ public class Interface extends ControladorUpdatesEjanelas {
         frame.add(painelBaixo, BorderLayout.SOUTH);
         frame.setVisible(true);
 
+
         btCriarComp.addActionListener(e -> {
             try {
                 ferroviaControlador.criaComposicao(ferroviaControlador.getLocomotiva(Integer.parseInt(txID.getText())));
@@ -312,21 +319,16 @@ public class Interface extends ControladorUpdatesEjanelas {
             }
             Updates.updateLocomotiva(txLocomotivas, ferroviaControlador);
             txLocomotivas.setText(txLocomotivas.getText().replace("],","]\n"));
+
+            JanelaEdit(ferroviaControlador, Integer.parseInt(txID.getText()));
+            frame.dispose();
         });
     }
-    public static void criarGUI()
-    {
-        FerroviaControlador ferroviaControlador = new FerroviaControlador();
-        ferroviaControlador.preencheGaragens();
-
-        JFrame Mainframe = new JFrame("TrainMaker");
-        Mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        Mainframe.setSize(900,250);
-        Mainframe.setLayout(new GridLayout(0,1));
-
-        Mainframe.setVisible(true);
+    private static JButton criarBotao(String texto) {
+        JButton botao = new JButton(texto);
+        botao.setFont(new Font("Arial", Font.PLAIN, 14));
+        return botao;
     }
-
 
     public static void main(String[] args) {
         FerroviaControlador ferroviaControlador = new FerroviaControlador();

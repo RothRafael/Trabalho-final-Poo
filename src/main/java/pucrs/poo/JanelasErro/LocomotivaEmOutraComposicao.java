@@ -17,4 +17,14 @@ public class LocomotivaEmOutraComposicao {
         Mainframe.setVisible(true);
 
     }
+    public static void ComposicaoNãoExisteOULOC()
+    {
+        JFrame Mainframe = new JFrame("ERRO!");
+        Mainframe.setSize(400,100);
+        Mainframe.setLayout(new GridLayout(0,1));
+
+        Mainframe.add(new JLabel("LOCOMOTIVA EM OUTRA COMPOSICAO OU \n COMPOSICAO NAO EXISTE"));
+        Mainframe.setVisible(true);
+
+    }
 }
