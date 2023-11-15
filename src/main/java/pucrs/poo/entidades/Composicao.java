@@ -134,6 +134,7 @@ public class Composicao{
         }
 
         vagoes.add(vagao);
+        vagao.setComposicao(this);
     }
 
     /**
