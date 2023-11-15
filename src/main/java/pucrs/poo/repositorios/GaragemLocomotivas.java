@@ -1,8 +1,10 @@
 package pucrs.poo.repositorios;
 
 import pucrs.poo.entidades.Locomotiva;
-
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.File;
 
 /**
  * @author marco.mangan@pucrs.br
@@ -47,14 +49,30 @@ public class GaragemLocomotivas {
     /**
      *
      */
-    public void preencheGaragem() {
-        final int PESO_MAXIMO = 300;
-        final int QTDADE_MAX_VAGOES = 100;
-        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
-        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
-        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
-        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
-        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
+    public void preencheGaragem() throws FileNotFoundException {
+//        final int PESO_MAXIMO = 300;
+//        final int QTDADE_MAX_VAGOES = 100;
+//        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
+//        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
+//        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
+//        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
+//        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
+
+
+        File arquivo = new File("src/main/java/pucrs/poo/repositorios/GaragemLocomotivas.csv");
+        Scanner scanner = new Scanner (arquivo);
+
+        while (scanner.hasNextLine())
+        {
+            String linha = scanner.nextLine();
+            String[] aux = linha.split(";");
+
+             int pesoMax = Integer.parseInt(aux[0]);
+             int qtdadeMaxVagoes =  Integer.parseInt(aux[1]);
+
+             Locomotiva locomotiva = new Locomotiva (pesoMax, qtdadeMaxVagoes);
+             locomotivas.add(locomotiva);
+        }
     }
 
 }

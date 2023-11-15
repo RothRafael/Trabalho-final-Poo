@@ -6,6 +6,7 @@ import pucrs.poo.repositorios.PatioComposicoes;
 import pucrs.poo.repositorios.GaragemLocomotivas;
 import pucrs.poo.repositorios.GaragemVagoes;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -41,8 +42,18 @@ public class FerroviaControlador {
      *
      */
     public void preencheGaragens() {
-        garagemLocomotivas.preencheGaragem();
-        garagemVagoes.preencheGaragem();
+
+        try {
+            garagemLocomotivas.preencheGaragem();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            garagemVagoes.preencheGaragem();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
