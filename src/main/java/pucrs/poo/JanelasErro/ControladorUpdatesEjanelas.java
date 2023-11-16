@@ -4,7 +4,6 @@ import javax.swing.*;
 
 public class ControladorUpdatesEjanelas {
     private static int compatual;
-    LocomotivaEmOutraComposicao locomotivaEmOutraComposicao =  new LocomotivaEmOutraComposicao();
 
     Updates updates = new Updates();
 

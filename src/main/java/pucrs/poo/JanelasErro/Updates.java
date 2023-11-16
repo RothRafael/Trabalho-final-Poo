@@ -21,7 +21,7 @@ public class Updates
     }
     public static void updateCompAtual(JTextArea tx, FerroviaControlador ferroviaControlador, Composicao composicao)
     {
-        tx.setText(ferroviaControlador.getComposicao(composicao).toString());
+        tx.setText(ferroviaControlador.getComposicao(composicao).toString().replace("],", "]\n"));
     }
 
 
