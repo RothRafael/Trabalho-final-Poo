@@ -79,7 +79,9 @@ public class FerroviaControlador {
     public void engataLocomotiva(Composicao composicao, Locomotiva locomotiva) throws LocomotivaEmOutraComposicaoException
             //, LocomotivaAposVagaoException
     {
-        composicao.engataLocomotiva(locomotiva);
+        if (composicao.getQtdadeVagoes() == 0){
+            composicao.engataLocomotiva(locomotiva);
+        }
     }
 
     /**
@@ -138,5 +140,18 @@ public class FerroviaControlador {
      */
     public Vagao getVagao(int identificador) {
         return garagemVagoes.getVagao(identificador);
+    }
+
+    public String getComposicaoSimplificada()
+    {
+        StringBuilder sB = new StringBuilder();
+
+        ArrayList<Composicao> comp = listaComposicoes();
+
+        for (Composicao composicao: comp)
+        {
+            sB.append(composicao.compSimples());
+        }
+        return sB.toString();
     }
 }

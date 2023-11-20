@@ -99,7 +99,7 @@ public class Interface extends ControladorUpdatesEjanelas {
             } catch (VagaoAposLocomotivaException ex) {
                 Popups.ALocomotivaPossuiVagoes();
             }
-            Updates.updateVagao(txLocomotivas, ferroviaControlador);
+            Updates.updateLocomotiva(txLocomotivas, ferroviaControlador);
             Updates.updateCompAtual(txCOMP, ferroviaControlador, composicao);
         });
         btsairDaEdição.addActionListener(e -> {
@@ -234,10 +234,15 @@ public class Interface extends ControladorUpdatesEjanelas {
         return ferroviaControlador;
     }
     private static void criarInterface(FerroviaControlador ferroviaControlador) {
+
+
         JFrame frame = new JFrame("M.C.T.I.I");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(640, 250);
         frame.setLayout(new BorderLayout());
+        ImageIcon img = new ImageIcon("pucrs/poo/JanelasErro/icone trabalgho.jpg");
+
+        frame.setIconImage(img.getImage());
 
 
         JLabel label = new JLabel("Montador de composições de trem\n implementados com interface");
@@ -402,7 +407,8 @@ public class Interface extends ControladorUpdatesEjanelas {
 
         frame.add(painel, BorderLayout.SOUTH);
 
-        textComp.setText(ferroviaControlador.listaComposicoes().toString().replace("]]], ", "\n"));
+//        textComp.setText(ferroviaControlador.listaComposicoes().toString().replace("]]], ", "\n"));
+        textComp.setText(ferroviaControlador.getComposicaoSimplificada());
 
 
         btRemoverComp.addActionListener(e -> {
@@ -418,7 +424,7 @@ public class Interface extends ControladorUpdatesEjanelas {
                 throw new RuntimeException(ex);
             }
             txId.setText("");
-            textComp.setText(ferroviaControlador.listaComposicoes().toString().replace("]]], ", "\n"));
+            textComp.setText(ferroviaControlador.getComposicaoSimplificada());
         });
 
         frame.setVisible(true);

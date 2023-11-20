@@ -187,8 +187,30 @@ public class Composicao{
     public String toString() {
         return new StringJoiner(", ", Composicao.class.getSimpleName() + "[", "]")
                 .add("Id=" + identificador)
-                .add("V=" + vagoes)
+
                 .add("L=" + locomotivas)
+
+                .add("V=" + vagoes)
                 .toString();
+    }
+    public String compSimples()
+    {
+        StringBuilder sB = new StringBuilder();
+
+        sB.append("Comp["+ getIdentificador() + "] ");
+
+        sB.append("[");
+        for (Locomotiva locomotiva: locomotivas)
+        {
+            sB.append("L" + locomotiva.getIdentificador() + " ");
+        }
+        sB.append("] ");
+        sB.append(" [");
+        for (Vagao vagao: vagoes)
+        {
+            sB.append("V" + vagao.getIdentificador() + " ");
+        }
+        sB.append("]\n");
+        return sB.toString();
     }
 }
