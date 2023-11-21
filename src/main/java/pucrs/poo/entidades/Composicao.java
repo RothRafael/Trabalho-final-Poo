@@ -197,14 +197,14 @@ public class Composicao{
     {
         StringBuilder sB = new StringBuilder();
 
-        sB.append("Comp["+ getIdentificador() + "] ");
+        sB.append("Comp[ "+ getIdentificador() + " ]");
 
-        sB.append("[");
+        sB.append("[ ");
         for (Locomotiva locomotiva: locomotivas)
         {
             sB.append("L" + locomotiva.getIdentificador() + " ");
         }
-        sB.append("] ");
+        sB.append("]");
         sB.append(" [");
         for (Vagao vagao: vagoes)
         {

@@ -24,6 +24,8 @@ public class Interface extends ControladorUpdatesEjanelas {
         JFrame frame = new JFrame();
         frame.setLayout(new GridLayout(0,1));
         frame.setSize(670,600);
+        frame.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - frame.getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - frame.getSize().height) / 2);
+
 
         JPanel panel1 = new JPanel(new BorderLayout());
 
@@ -280,7 +282,7 @@ public class Interface extends ControladorUpdatesEjanelas {
     public static void janelaPreEdit(FerroviaControlador ferroviaControlador)
     {
         JFrame frame = new JFrame("Antes de Editar");
-        frame.setSize(450, 200);
+        frame.setSize(640, 250);
         frame.setLayout(new BorderLayout());
 
 
@@ -327,7 +329,7 @@ public class Interface extends ControladorUpdatesEjanelas {
     {
         JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
-        frame.setSize(500,250);
+        frame.setSize(640, 250);
 
         JPanel painel = new JPanel(new BorderLayout());
 
@@ -382,8 +384,9 @@ public class Interface extends ControladorUpdatesEjanelas {
     }
     public static void listarComposicoes(FerroviaControlador ferroviaControlador) {
         JFrame frame = new JFrame("Lista de composições");
-        frame.setLayout(new BorderLayout());
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(640, 250);
+
 
         JPanel panel = new JPanel(new BorderLayout());
         JTextArea textComp = new JTextArea(10, 40);
