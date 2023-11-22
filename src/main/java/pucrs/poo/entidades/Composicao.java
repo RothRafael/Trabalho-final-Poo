@@ -216,18 +216,18 @@ public class Composicao{
     public String compArquivo() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Comp[ " + getIdentificador() + " ]");
+        sb.append("[" + getIdentificador() + "]");
 
-        sb.append("[ ");
+        sb.append(" [");
         for (Locomotiva locomotiva : locomotivas) {
             sb.append(locomotiva.getPesoMaximo()).append(" ");
             sb.append(locomotiva.getQtdadeMaxVagoes()).append(" ");
-            sb.append(locomotiva.getIdentificador()).append(" ");
+            sb.append(locomotiva.getIdentificador());
         }
         sb.append("] [");
         for (Vagao vagao : vagoes) {
             sb.append(vagao.getCapacidadeCarga()).append(" ");
-            sb.append(vagao.getIdentificador()).append(" ");
+            sb.append(vagao.getIdentificador());
         }
         sb.append("]\n");
 

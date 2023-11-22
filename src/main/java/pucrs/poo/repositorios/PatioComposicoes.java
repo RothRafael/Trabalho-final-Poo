@@ -2,9 +2,12 @@ package pucrs.poo.repositorios;
 
 import pucrs.poo.entidades.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * @author marco.mangan@pucrs.br
@@ -82,6 +85,25 @@ public class PatioComposicoes {
 		}
 
 		arquivo.close();
+	}
+	public void lePatio() throws FileNotFoundException {
+		File arquivo = new File("src/main/java/pucrs/poo/repositorios/Patio.csv");
+
+		Scanner scanner = new Scanner(arquivo);
+
+		while (scanner.hasNextLine())
+		{
+			String comp;
+			String loc;
+			String vag;
+
+			String linha = scanner.nextLine();
+
+			for (int i = 0; i < linha.length(); i++)
+			{
+
+			}
+		}
 	}
 
 }
