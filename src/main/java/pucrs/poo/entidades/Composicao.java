@@ -18,7 +18,7 @@ public class Composicao{
     /**
      * O identificador desta composição.
      */
-    private final int identificador;
+    private int identificador;
 
     /**
      * A lista de vagões da composição.
@@ -55,6 +55,11 @@ public class Composicao{
      */
     public int getIdentificador() {
         return identificador;
+    }
+
+    public void setId(int id)
+    {
+        this.identificador = id;
     }
 
     /**
@@ -216,20 +221,19 @@ public class Composicao{
     public String compArquivo() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("[" + getIdentificador() + "]");
+        sb.append("" + getIdentificador() + ",");
 
-        sb.append(" [");
         for (Locomotiva locomotiva : locomotivas) {
             sb.append(locomotiva.getPesoMaximo()).append(" ");
             sb.append(locomotiva.getQtdadeMaxVagoes()).append(" ");
             sb.append(locomotiva.getIdentificador());
         }
-        sb.append("] [");
+        sb.append(",");
         for (Vagao vagao : vagoes) {
             sb.append(vagao.getCapacidadeCarga()).append(" ");
-            sb.append(vagao.getIdentificador());
+            sb.append(vagao.getIdentificador());//.append("");
         }
-        sb.append("]\n");
+        sb.append("\n");
 
         return sb.toString();
     }

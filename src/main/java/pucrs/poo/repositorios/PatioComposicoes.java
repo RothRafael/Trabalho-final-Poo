@@ -82,6 +82,8 @@ public class PatioComposicoes {
 
 			arquivo.write(composicao.compArquivo() + "\n");
 
+
+
 		}
 
 		arquivo.close();
@@ -93,17 +95,68 @@ public class PatioComposicoes {
 
 		while (scanner.hasNextLine())
 		{
+			String linha = scanner.nextLine();
+			String[] aux = linha.split(",");
+
 			String comp;
 			String loc;
 			String vag;
 
-			String linha = scanner.nextLine();
-
 			for (int i = 0; i < linha.length(); i++)
 			{
+//				int identificador = Integer.parseInt(aux[0]);
+//
+//				String peloamordedeus = Integer.toString(Integer.parseInt(aux[1]));
+//				String aaaa = Integer.toString(Integer.parseInt(aux[2]));
+//
+//
+//				String[] locomotivaAux = new String[3];
+//				locomotivaAux = peloamordedeus.split(" ");
+//
+//				int identificadorLocomotiva =
+//				int pesoMaximoLocomotiva =
+//				int qtdadeMaxVagoes =
+//
+//				Locomotiva locomotiva = new Locomotiva (pesoMaximoLocomotiva, qtdadeMaxVagoes);
+//				locomotiva.setId(identificadorLocomotiva);
+//
+//				try {
+//					Composicao composicao = new Composicao (locomotiva);
+//					composicao.setId(identificador);
+//				} catch (LocomotivaEmOutraComposicaoException e) {
+//					throw new RuntimeException(e);
+//				}
+//
+//				String[] vagaoAux = new String[2];
+//				vagaoAux = aaaa.split(" ");
+//
+//				int identificadorVagao =
+//				int capacidadeCarga =
+//
+//				Vagao vagao = new Vagao (capacidadeCarga);
+//				vagao.setId(identificadorVagao);
 
 			}
 		}
+
+//		File arquivo = new File("src/main/java/pucrs/poo/repositorios/GaragemLocomotivas.csv");
+//		Scanner scanner = new Scanner (arquivo);
+//
+//		while (scanner.hasNextLine())
+//		{
+//			String linha = scanner.nextLine();
+//			String[] aux = linha.split(";");
+//
+//			int pesoMax = Integer.parseInt(aux[0]);
+//			int qtdadeMaxVagoes =  Integer.parseInt(aux[1]);
+//			int id = Integer.parseInt(aux[2]);
+//
+//			Locomotiva locomotiva = new Locomotiva (pesoMax, qtdadeMaxVagoes);
+//			locomotiva.setId(id);
+//			locomotivas.add(locomotiva);
+//		}
+
+
 	}
 
 }
