@@ -15,7 +15,7 @@ public class Vagao extends Carro{
     /**
      * O identificador do vagão.
      */
-    private final int identificador;
+    private int identificador;
 
     /**
      * A capacidae de carga do vagão em quilogramas
@@ -32,7 +32,7 @@ public class Vagao extends Carro{
      * @param capacidadeCarga a capacidade de carga em quilogramas
      */
     public Vagao(double capacidadeCarga) {
-        identificador = NEXT_ID++;
+        identificador = getIdentificador();
         this.capacidadeCarga = capacidadeCarga;
     }
 
@@ -40,6 +40,10 @@ public class Vagao extends Carro{
      *
      * @return o identificador do vagão
      */
+    public void setId(int id)
+    {
+        this.identificador = id;
+    }
     public int getIdentificador() {
         return identificador;
     }
@@ -48,8 +52,8 @@ public class Vagao extends Carro{
      *
      * @return a capacidade de carga do vagão
      */
-    public double getCapacidadeCarga() {
-        return capacidadeCarga;
+    public int getCapacidadeCarga() {
+        return (int) capacidadeCarga;
     }
 
     /**

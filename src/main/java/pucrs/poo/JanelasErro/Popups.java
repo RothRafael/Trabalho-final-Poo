@@ -55,4 +55,14 @@ public class Popups {
         Mainframe.setVisible(true);
 
     }
+    public static void LocomotivaApósVagao()
+    {
+        JFrame Mainframe = new JFrame("ERRO!");
+        Mainframe.setSize(450,100);
+        Mainframe.setLayout(new GridLayout(0,1));
+
+        Mainframe.add(new JLabel("NÃO É POSSIVEL ADICIONAR UMA LOCOMOTIVA APÓS UM VAGAO"));
+        Mainframe.setVisible(true);
+
+    }
 }

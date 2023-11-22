@@ -2,6 +2,8 @@ package pucrs.poo.repositorios;
 
 import pucrs.poo.entidades.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -69,6 +71,17 @@ public class PatioComposicoes {
 		}
 		Composicao composicao = new Composicao(locomotiva);
 		composicoes.add(composicao);
+	}
+	public void salvaPatio() throws IOException {
+		FileWriter arquivo = new FileWriter("src/main/java/pucrs/poo/repositorios/Patio.csv");
+
+		for (Composicao composicao : composicoes) {
+
+			arquivo.write(composicao.compArquivo() + "\n");
+
+		}
+
+		arquivo.close();
 	}
 
 }

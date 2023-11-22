@@ -8,6 +8,7 @@ import pucrs.poo.repositorios.IdentificadorNaoEncontradoExceptioin;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -91,6 +92,12 @@ public class Interface extends ControladorUpdatesEjanelas {
             }
             Updates.updateVagao(txVagoes, ferroviaControlador);
             Updates.updateCompAtual(txCOMP, ferroviaControlador, composicao);
+
+            try {
+                ferroviaControlador.salvarVagoes();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         btRemLocomotiva.addActionListener(e -> {
@@ -103,6 +110,12 @@ public class Interface extends ControladorUpdatesEjanelas {
             }
             Updates.updateLocomotiva(txLocomotivas, ferroviaControlador);
             Updates.updateCompAtual(txCOMP, ferroviaControlador, composicao);
+
+            try {
+                ferroviaControlador.salvarLocomotivas();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         btsairDaEdição.addActionListener(e -> {
             frame.dispose();
@@ -168,6 +181,12 @@ public class Interface extends ControladorUpdatesEjanelas {
             Updates.updateVagao(txVagoes, ferroviaControlador);
             Updates.updateCompAtual(txCOMP, ferroviaControlador, composicao);
             txIDvagao.setText("");
+
+            try {
+                ferroviaControlador.salvarVagoes();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -224,11 +243,19 @@ public class Interface extends ControladorUpdatesEjanelas {
                 ferroviaControlador.engataLocomotiva(composicao, ferroviaControlador.getLocomotiva(Integer.parseInt(txIDLocomotiva.getText())));
             } catch (LocomotivaEmOutraComposicaoException ex) {
                 Popups.LocomotivaEmOutraComp();
+            } catch (LocomotivaAposVagaoException ex) {
+                Popups.LocomotivaApósVagao();
             }
 
             clearTx(txIDLocomotiva);
-            Updates.updateComp(txCOMP, ferroviaControlador);
+            Updates.updateCompAtual(txCOMP, ferroviaControlador, composicao);
             Updates.updateLocomotiva(txLocomotivas, ferroviaControlador);
+
+            try {
+                ferroviaControlador.salvarLocomotivas();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
 
@@ -408,12 +435,21 @@ public class Interface extends ControladorUpdatesEjanelas {
         JTextField txId = new JTextField(4);
         painel.add(txId);
 
+        JButton btSalva = new JButton("SALVAR");
+        painel.add(btSalva);
+
         frame.add(painel, BorderLayout.SOUTH);
 
 //        textComp.setText(ferroviaControlador.listaComposicoes().toString().replace("]]], ", "\n"));
         textComp.setText(ferroviaControlador.getComposicaoSimplificada());
 
-
+        btSalva.addActionListener(e -> {
+            try {
+                ferroviaControlador.salvarComposicoes();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         btRemoverComp.addActionListener(e -> {
             try {
                 ferroviaControlador.desfazComposicao(ferroviaControlador.getComposicao(Integer.parseInt(txId.getText())));

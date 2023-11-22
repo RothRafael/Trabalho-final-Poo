@@ -162,6 +162,8 @@ public class FerroviaApp {
             System.out.println("FALHA: locomotiva pertence a outra composição!");
 //        } catch (LocomotivaAposVagaoException e) {
 //            System.out.println("FALHA: locomotiva após vagão!");
+        } catch (LocomotivaAposVagaoException e) {
+            throw new RuntimeException(e);
         }
     }
 

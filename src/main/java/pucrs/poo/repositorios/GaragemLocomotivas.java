@@ -1,6 +1,9 @@
 package pucrs.poo.repositorios;
 
 import pucrs.poo.entidades.Locomotiva;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -28,7 +31,14 @@ public class GaragemLocomotivas {
      * @return
      */
     public Locomotiva getLocomotiva(int identificador) {
-        return locomotivas.get(identificador - 1);
+        for (Locomotiva locomotiva: locomotivas)
+        {
+            if (locomotiva.getIdentificador() == identificador)
+            {
+                return locomotiva;
+            }
+        }
+        return null;
     }
 
     /**
@@ -50,14 +60,6 @@ public class GaragemLocomotivas {
      *
      */
     public void preencheGaragem() throws FileNotFoundException {
-//        final int PESO_MAXIMO = 300;
-//        final int QTDADE_MAX_VAGOES = 100;
-//        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
-//        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
-//        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
-//        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
-//        locomotivas.add(new Locomotiva(PESO_MAXIMO, QTDADE_MAX_VAGOES));
-
 
         File arquivo = new File("src/main/java/pucrs/poo/repositorios/GaragemLocomotivas.csv");
         Scanner scanner = new Scanner (arquivo);
@@ -69,10 +71,28 @@ public class GaragemLocomotivas {
 
              int pesoMax = Integer.parseInt(aux[0]);
              int qtdadeMaxVagoes =  Integer.parseInt(aux[1]);
+             int id = Integer.parseInt(aux[2]);
 
              Locomotiva locomotiva = new Locomotiva (pesoMax, qtdadeMaxVagoes);
+             locomotiva.setId(id);
              locomotivas.add(locomotiva);
         }
+    }
+    public void salvarGaragem() throws IOException {
+        FileWriter arquivo = new FileWriter("src/main/java/pucrs/poo/repositorios/GaragemLocomotivas.csv");
+
+        for (Locomotiva locomotiva: getLocomotivasLivres())
+        {
+            String pesoMax = locomotiva.getPesoMaximo() + "";
+            String qtdadeMaxVagoes = locomotiva.getQtdadeMaxVagoes() + "";
+            int id = locomotiva.getIdentificador();
+
+            arquivo.write(pesoMax + ";");
+            arquivo.write(qtdadeMaxVagoes + ";");
+            arquivo.write(id + "");
+            arquivo.append("\n");
+        }
+        arquivo.close();
     }
 
 }

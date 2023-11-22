@@ -7,6 +7,7 @@ import pucrs.poo.repositorios.GaragemLocomotivas;
 import pucrs.poo.repositorios.GaragemVagoes;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -76,13 +77,14 @@ public class FerroviaControlador {
      * @param composicao a composição
      * @param locomotiva a locomotiva a ser engatada
      */
-    public void engataLocomotiva(Composicao composicao, Locomotiva locomotiva) throws LocomotivaEmOutraComposicaoException
-            //, LocomotivaAposVagaoException
+    public void engataLocomotiva(Composicao composicao, Locomotiva locomotiva)
+            throws LocomotivaEmOutraComposicaoException, LocomotivaAposVagaoException
     {
         if (composicao.getQtdadeVagoes() == 0){
             composicao.engataLocomotiva(locomotiva);
         }
     }
+
 
     /**
      * @param composicao a composição
@@ -153,5 +155,14 @@ public class FerroviaControlador {
             sB.append(composicao.compSimples());
         }
         return sB.toString();
+    }
+    public void salvarVagoes() throws IOException {
+        garagemVagoes.salvarGaragem();
+    }
+    public void salvarLocomotivas() throws IOException {
+        garagemLocomotivas.salvarGaragem();
+    }
+    public void salvarComposicoes() throws IOException {
+        patioComposicoes.salvaPatio();
     }
 }

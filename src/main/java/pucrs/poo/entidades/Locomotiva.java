@@ -17,12 +17,12 @@ public class Locomotiva extends Carro{
     /**
      * O identificador desta composição.
      */
-    private final int identificador;
+    private int identificador;
 
     /**
      *
      */
-    private final double pesoMaximo;
+    private final int pesoMaximo;
 
     /**
      *
@@ -39,7 +39,7 @@ public class Locomotiva extends Carro{
      * @param pesoMaximo
      * @param qtdadeMaxVagoes
      */
-    public Locomotiva(double pesoMaximo, int qtdadeMaxVagoes) {
+    public Locomotiva(int pesoMaximo, int qtdadeMaxVagoes) {
         identificador = NEXT_ID++;
         this.pesoMaximo = pesoMaximo;
         this.qtdadeMaxVagoes = qtdadeMaxVagoes;
@@ -49,6 +49,10 @@ public class Locomotiva extends Carro{
      *
      * @return
      */
+    public void setId(int id)
+    {
+        this.identificador = id;
+    }
     public int getIdentificador() {
         return identificador;
     }
@@ -57,8 +61,8 @@ public class Locomotiva extends Carro{
      *
      * @return
      */
-    public double getPesoMaximo() {
-        return pesoMaximo;
+    public int getPesoMaximo() {
+        return (int) pesoMaximo;
     }
 
     /**
