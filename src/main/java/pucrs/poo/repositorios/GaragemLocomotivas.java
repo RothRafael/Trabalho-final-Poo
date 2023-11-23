@@ -94,5 +94,9 @@ public class GaragemLocomotivas {
         }
         arquivo.close();
     }
+    public void criarLocomotiva(Locomotiva locomotiva)
+    {
+        locomotivas.add(locomotiva);
+    }
 
 }

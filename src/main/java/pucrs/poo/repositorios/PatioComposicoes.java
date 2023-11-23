@@ -1,5 +1,6 @@
 package pucrs.poo.repositorios;
 
+import pucrs.poo.FerroviaControlador;
 import pucrs.poo.entidades.*;
 
 import java.io.*;
@@ -82,7 +83,7 @@ public class PatioComposicoes {
 
 		arquivo.close();
 	}
-	public void preencheGaragem() throws IOException {
+	public void preencheGaragem(FerroviaControlador ferroviaControlador) throws IOException {
 		String nomeArquivo = "src/main/java/pucrs/poo/repositorios/Patio.csv";
 
 		try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
@@ -109,8 +110,9 @@ public class PatioComposicoes {
 
 				Locomotiva locomotiva = new Locomotiva(pesomax,qtdVagao);
 				locomotiva.setId(idloc);
+				ferroviaControlador.criaLoc(locomotiva);
 
-				Composicao comp = new Composicao(locomotiva);
+				Composicao comp = new Composicao(ferroviaControlador.getLocomotiva(Integer.parseInt(loc[2])));
 
 				if (loc.length > 3)
 				{
@@ -118,7 +120,9 @@ public class PatioComposicoes {
 					{
 						Locomotiva locomotivaLoop = new Locomotiva(Integer.parseInt(loc[i]), Integer.parseInt(loc[i + 1]));
 						locomotivaLoop.setId(Integer.parseInt(loc[i + 2]));
-						comp.engataLocomotiva(locomotivaLoop);
+
+						ferroviaControlador.criaLoc(locomotivaLoop);
+						comp.engataLocomotiva(ferroviaControlador.getLocomotiva(Integer.parseInt(loc[i + 2])));
 					}
 				}
 				String[] vag = new String[0];
@@ -134,7 +138,10 @@ public class PatioComposicoes {
 					{
 						Vagao vagaoLoop = new Vagao(Integer.parseInt(vag[i]));
 						vagaoLoop.setId(Integer.parseInt(vag[i+1]));
-						comp.engataVagao(vagaoLoop);
+
+						ferroviaControlador.criaVagao(vagaoLoop);
+						comp.engataVagao(ferroviaControlador.getVagao(Integer.parseInt(vag[i+1])));
+
 					}
 				}
 				composicoes.add(comp);

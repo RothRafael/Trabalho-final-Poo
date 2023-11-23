@@ -92,5 +92,9 @@ public class GaragemVagoes {
         }
         arquivo.close();
     }
+    public void criarVagao(Vagao vagao)
+    {
+        vagoes.add(vagao);
+    }
 
 }

@@ -55,7 +55,7 @@ public class FerroviaControlador {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        patioComposicoes.preencheGaragem();
+        patioComposicoes.preencheGaragem(this);
     }
 
     /**
@@ -165,5 +165,13 @@ public class FerroviaControlador {
     }
     public void salvarComposicoes() throws IOException {
         patioComposicoes.salvaPatio();
+    }
+    public void criaVagao(Vagao vagao)
+    {
+        garagemVagoes.criarVagao(vagao);
+    }
+    public void criaLoc(Locomotiva locomotiva)
+    {
+        garagemLocomotivas.criarLocomotiva(locomotiva);
     }
 }
