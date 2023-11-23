@@ -78,9 +78,6 @@ public class PatioComposicoes {
 		for (Composicao composicao : composicoes) {
 
 			arquivo.write(composicao.compArquivo() + "\n");
-
-
-
 		}
 
 		arquivo.close();
@@ -93,14 +90,18 @@ public class PatioComposicoes {
 
 			while ((linha = br.readLine()) != null) {
 				String[] numeros = linha.split(",");
+				System.out.println(numeros.toString());
 
 				// Armazena os números da parte 1
 				String id = numeros[0];
 				String locomotivas = numeros[1];
-				String vagoes = numeros[2];
+				String vagoes = "";
+				if(numeros.length > 2)
+					vagoes = numeros[2];
 
 
 				String[] loc = locomotivas.split(" ");
+				System.out.println(loc.toString());
 
 				int pesomax = Integer.parseInt(loc[0]);
 				int qtdVagao = Integer.parseInt(loc[1]);
@@ -120,11 +121,15 @@ public class PatioComposicoes {
 						comp.engataLocomotiva(locomotivaLoop);
 					}
 				}
-
-				String[] vag = vagoes.split(" ");
+				String[] vag = new String[0];
+				if(!vagoes.isEmpty())
+					vag = vagoes.split(" ");
 				if (vag.length > 0)
 				{
 					System.out.println("TESTE");
+
+
+
 					for (int i = 0; i < vag.length; i = i + 2)
 					{
 						Vagao vagaoLoop = new Vagao(Integer.parseInt(vag[i]));

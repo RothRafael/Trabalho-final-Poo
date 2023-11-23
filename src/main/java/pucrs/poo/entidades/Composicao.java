@@ -233,6 +233,7 @@ public class Composicao{
             sb.append(vagao.getCapacidadeCarga()).append(" ");
             sb.append(vagao.getIdentificador()).append(" ");
         }
+        sb.replace(sb.lastIndexOf(" "), sb.length(), "");
 
         return sb.toString();
     }
