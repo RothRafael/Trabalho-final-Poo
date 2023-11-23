@@ -2,10 +2,7 @@ package pucrs.poo.repositorios;
 
 import pucrs.poo.entidades.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -88,75 +85,67 @@ public class PatioComposicoes {
 
 		arquivo.close();
 	}
-	public void lePatio() throws FileNotFoundException {
-		File arquivo = new File("src/main/java/pucrs/poo/repositorios/Patio.csv");
+	public void preencheGaragem() throws IOException {
+		String nomeArquivo = "src/main/java/pucrs/poo/repositorios/Patio.csv";
 
-		Scanner scanner = new Scanner(arquivo);
+		try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
+			String linha;
 
-		while (scanner.hasNextLine())
-		{
-			String linha = scanner.nextLine();
-			String[] aux = linha.split(",");
+			while ((linha = br.readLine()) != null) {
+				String[] numeros = linha.split(",");
 
-			String comp;
-			String loc;
-			String vag;
+				// Armazena os números da parte 1
+				String id = numeros[0];
+				String locomotivas = numeros[1];
+				String vagoes = numeros[2];
 
-			for (int i = 0; i < linha.length(); i++)
-			{
-//				int identificador = Integer.parseInt(aux[0]);
-//
-//				String peloamordedeus = Integer.toString(Integer.parseInt(aux[1]));
-//				String aaaa = Integer.toString(Integer.parseInt(aux[2]));
-//
-//
-//				String[] locomotivaAux = new String[3];
-//				locomotivaAux = peloamordedeus.split(" ");
-//
-//				int identificadorLocomotiva =
-//				int pesoMaximoLocomotiva =
-//				int qtdadeMaxVagoes =
-//
-//				Locomotiva locomotiva = new Locomotiva (pesoMaximoLocomotiva, qtdadeMaxVagoes);
-//				locomotiva.setId(identificadorLocomotiva);
-//
-//				try {
-//					Composicao composicao = new Composicao (locomotiva);
-//					composicao.setId(identificador);
-//				} catch (LocomotivaEmOutraComposicaoException e) {
-//					throw new RuntimeException(e);
-//				}
-//
-//				String[] vagaoAux = new String[2];
-//				vagaoAux = aaaa.split(" ");
-//
-//				int identificadorVagao =
-//				int capacidadeCarga =
-//
-//				Vagao vagao = new Vagao (capacidadeCarga);
-//				vagao.setId(identificadorVagao);
 
+				String[] loc = locomotivas.split(" ");
+
+				int pesomax = Integer.parseInt(loc[0]);
+				int qtdVagao = Integer.parseInt(loc[1]);
+				int idloc = Integer.parseInt(loc[2]);
+
+				Locomotiva locomotiva = new Locomotiva(pesomax,qtdVagao);
+				locomotiva.setId(idloc);
+
+				Composicao comp = new Composicao(locomotiva);
+
+				if (loc.length > 3)
+				{
+					for (int i = 3; i < loc.length; i = i + 3)
+					{
+						Locomotiva locomotivaLoop = new Locomotiva(Integer.parseInt(loc[i]), Integer.parseInt(loc[i + 1]));
+						locomotivaLoop.setId(Integer.parseInt(loc[i + 2]));
+						comp.engataLocomotiva(locomotivaLoop);
+					}
+				}
+
+				String[] vag = vagoes.split(" ");
+				if (vag.length > 0)
+				{
+					System.out.println("TESTE");
+					for (int i = 0; i < vag.length; i = i + 2)
+					{
+						Vagao vagaoLoop = new Vagao(Integer.parseInt(vag[i]));
+						vagaoLoop.setId(Integer.parseInt(vag[i+1]));
+						comp.engataVagao(vagaoLoop);
+					}
+				}
+				composicoes.add(comp);
+				System.out.println(composicoes);
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (LocomotivaEmOutraComposicaoException e) {
+			System.out.println("erro");
+		} catch (PesoMaximoExcedidoException e) {
+			System.out.println("erro");
+		} catch (MaximoDeVagoesExcedidoException e) {
+			System.out.println("erro");
+		} catch (VagaoEmOutraComposicaoException e) {
+			System.out.println("erro");
 		}
-
-//		File arquivo = new File("src/main/java/pucrs/poo/repositorios/GaragemLocomotivas.csv");
-//		Scanner scanner = new Scanner (arquivo);
-//
-//		while (scanner.hasNextLine())
-//		{
-//			String linha = scanner.nextLine();
-//			String[] aux = linha.split(";");
-//
-//			int pesoMax = Integer.parseInt(aux[0]);
-//			int qtdadeMaxVagoes =  Integer.parseInt(aux[1]);
-//			int id = Integer.parseInt(aux[2]);
-//
-//			Locomotiva locomotiva = new Locomotiva (pesoMax, qtdadeMaxVagoes);
-//			locomotiva.setId(id);
-//			locomotivas.add(locomotiva);
-//		}
-
-
 	}
-
 }
+

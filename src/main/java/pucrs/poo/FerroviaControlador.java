@@ -42,7 +42,7 @@ public class FerroviaControlador {
     /**
      *
      */
-    public void preencheGaragens() {
+    public void preencheGaragens() throws IOException {
 
         try {
             garagemLocomotivas.preencheGaragem();
@@ -55,6 +55,7 @@ public class FerroviaControlador {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        patioComposicoes.preencheGaragem();
     }
 
     /**

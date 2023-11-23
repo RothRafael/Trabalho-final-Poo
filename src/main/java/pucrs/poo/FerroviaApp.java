@@ -3,6 +3,7 @@ package pucrs.poo;
 import pucrs.poo.entidades.*;
 import pucrs.poo.repositorios.IdentificadorNaoEncontradoExceptioin;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -17,7 +18,7 @@ public class FerroviaApp {
      *
      * @param args não é utilizado
      */
-    public static void main(java.lang.String[] args) {
+    public static void main(java.lang.String[] args) throws IOException {
         Scanner in = new Scanner(System.in);
 
         mostrarCabecalho();
